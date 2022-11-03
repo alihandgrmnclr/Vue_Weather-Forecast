@@ -2,12 +2,14 @@
 
 const props = defineProps(["data"]);
 
+console.log(props.data);
 
 </script>
 
 <template>
-  <template v-if="!props.data">
-    <div class="forecast">
+  <div class="forecast">
+
+    <template v-if="props.data">
       <div class="forecast__time">
         <p>Thursday</p>
         <p>17.05</p>
@@ -42,8 +44,9 @@ const props = defineProps(["data"]);
           </ul>
         </div>
       </div>
-    </div>
-  </template>
+    </template>
+
+  </div>
 
 </template>
 

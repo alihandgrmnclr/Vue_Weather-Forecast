@@ -1,16 +1,17 @@
 <script setup>
+import { ref } from "vue";
+import { mainHttp, apiKey } from "../service/HttpService"
 import ButtonComp from '../components/ButtonComp.vue';
 
-const props = defineProps(["city"]);
-const apiKey = "8ba8d918b3ff4a298cc397a81fd92bbe";
-
-
+const city = ref("");
+const weatherData = ref(null);
+const weather = ref(false);
 
 const getData = async () => {
 
   if (city.value.length < 2) return;
 
-  const result = await mainHttp.get(`${city.value}&lang=en&days=3&key=${apiKey}`)
+  const result = await mainHttp.get(`weather?q=${city.value}&appid=${apiKey}&units=metric`)
     .then(res => weatherData.value = res.data);
 
   console.log(weatherData.value);
