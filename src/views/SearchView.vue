@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { mainHttp, apiKey } from "../service/HttpService"
 import ButtonComp from '../components/ButtonComp.vue';
+import Forecast from "../components/Forecast.vue";
 
 const city = ref("");
 const weatherData = ref(null);
@@ -37,7 +38,9 @@ const getFav = () => {
     </div>
     <ButtonComp @click="getData"></ButtonComp>
   </main>
-  <h1>This is search page</h1>
+  <template v-if="weatherData">
+    <Forecast class="search-forecast" :data="weatherData"></Forecast>
+  </template>
 </template>
 
 <style scoped>
@@ -52,4 +55,9 @@ main {
 .text-input {
   @apply border rounded-md;
 }
+
+.search-forecast{
+  @apply h-[80vh];
+}
+
 </style>

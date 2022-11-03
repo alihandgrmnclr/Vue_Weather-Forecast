@@ -1,9 +1,7 @@
 <script setup>
 
 const props = defineProps(["data"]);
-
-console.log(props.data);
-
+ 
 </script>
 
 <template>
@@ -11,36 +9,35 @@ console.log(props.data);
 
     <template v-if="props.data">
       <div class="forecast__time">
-        <p>Thursday</p>
-        <p>17.05</p>
+        <p>week day</p>
+        <p>hour of day</p>
       </div>
       <div class="forecast__city">
-        <p>Safranbolu, TR</p>
+        <p>{{ props.data.name }}, {{ props.data.sys.country }}</p>
       </div>
       <div class="forecast__temp">
-        <p>18°</p>
+        <p>{{ Math.round(props.data.main.temp) }}°</p>
       </div>
       <div class="forecast__maxes">
-        <p><span class="forecast__maxes-max">18° </span>/ <span class="forecast__maxes-min">3°</span></p>
+        <p><span class="forecast__maxes-max">{{ Math.round(props.data.main.temp_max) }}° </span>/ <span
+            class="forecast__maxes-min">{{ Math.round(props.data.main.temp_min) }}°</span></p>
       </div>
       <div class="forecast__description">
-        <img class="forecast__description__icon" src="https://cdn-icons-png.flaticon.com/512/4735/4735030.png" alt="">
-        <p>Cloudy</p>
+        <img class="forecast__description__icon" :src="'icons/'+props.data.weather[0].icon+'.png'" alt="">
+        <p>{{ props.data.weather[0].description }}</p>
       </div>
 
       <div class="forecast__details">
         <div class="forecast__details__list">
           <ul class="list-titles">
             <li>Humidity</li>
-            <li>Wind Direction</li>
             <li>Wind Speed</li>
-            <li>POP(Rain%)</li>
+            <li>Feels Like</li>
           </ul>
           <ul class="list-descriptions">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
+            <li>{{ props.data.main.humidity }}%</li>
+            <li>{{ props.data.wind.speed }}</li>
+            <li>{{ Math.round(props.data.main.feels_like) }}°</li>
           </ul>
         </div>
       </div>
@@ -64,7 +61,7 @@ console.log(props.data);
   }
 
   &__temp {
-    @apply text-[5rem] font-medium;
+    @apply text-[5rem] font-medium ml-5;
   }
 
   &__maxes {
