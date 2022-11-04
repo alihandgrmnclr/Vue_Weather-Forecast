@@ -23,6 +23,6 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 nav {
-  @apply flex items-center justify-center gap-4;
+  @apply flex items-center justify-center gap-4 text-lg font-medium;
 }
 </style>

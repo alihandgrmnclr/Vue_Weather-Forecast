@@ -10,4 +10,7 @@ body{
 }
 #app{
   width: 100%;
+  background-image: url(bg-image/bgImg.jpg);
+  background-position: 60%;
+  background-size: cover;
 }

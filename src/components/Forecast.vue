@@ -1,8 +1,10 @@
 <script setup>
-import LanguageToggle from './LanguageToggle.vue';
 
 const props = defineProps(["data"]);
 
+const date = new Date().getHours() +"."+ new Date().getMinutes();
+const weekDays = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+const day = weekDays[new Date().getDay()];
 
 </script>
 
@@ -10,11 +12,10 @@ const props = defineProps(["data"]);
   <Transition>
     <div class="forecast">
       
-      <LanguageToggle></LanguageToggle>
       <template v-if="props.data">
         <div class="forecast__time">
-          <p>week day</p>
-          <p>hour of day</p>
+          <p>{{ date }}</p>
+          <p>{{ day }}</p>
         </div>
         <div class="forecast__city">
           <p>{{ props.data.name }}, {{ props.data.sys.country }}</p>
@@ -40,7 +41,7 @@ const props = defineProps(["data"]);
             </ul>
             <ul class="list-descriptions">
               <li>{{ props.data.main.humidity }}%</li>
-              <li>{{ props.data.wind.speed }}</li>
+              <li>{{ props.data.wind.speed }} m/s</li>
               <li>{{ Math.round(props.data.main.feels_like) }}°</li>
             </ul>
           </div>
@@ -54,9 +55,6 @@ const props = defineProps(["data"]);
 .forecast {
 
   @apply flex flex-col h-full justify-center items-center gap-2 text-white font-normal;
-  background-image: url("https://w7.pngwing.com/pngs/129/100/png-transparent-violet-blue-sky-purple-blue-background-sky-skyline.png");
-  background-size: cover;
-  background-repeat: no-repeat;
 
   &__time {
     @apply flex flex-col justify-center items-center text-[1.5rem] font-medium;

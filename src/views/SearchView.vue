@@ -3,64 +3,58 @@ import { ref } from "vue";
 import { mainHttp, apiKey } from "../service/HttpService"
 import ButtonComp from '../components/ButtonComp.vue';
 import Forecast from "../components/Forecast.vue";
-import Swal from "sweetalert2"
+import AlertComp from '../components/AlertComp.vue';
 
 const city = ref("");
 const weatherData = ref(null);
-const weather = ref(false);
+const showAlert = ref(false);
 
 const getData = async () => {
 
-  if (city.value.length <= 2) return alert("Please enter a valid city name");
+  if (city.value.length <= 2) return showAlert.value = true, city.value = "";
+
 
   const result = await mainHttp.get(`weather?q=${city.value}&appid=${apiKey}&units=metric&lang=tr`)
     .then(res => weatherData.value = res.data)
-    .catch(err => Swal.fire({
-      title: 'Error!',
-      text: 'Please enter a valid city name',
-      icon: 'error',
-      confirmButtonText: 'Accept'
-    }))
-
-  weather.value = true;
+    .catch(err => showAlert.value = true)
+  city.value = "";
   return result;
 }
 
-const addFav = () => {
-  setFavourites(city.value)
+const acceptAlertHandler = () => {
+  showAlert.value = false
 };
-
-const getFav = () => {
-  return getFavourites();
-}
-
-
 
 </script>
 
 <template>
+  <Teleport to="#app">
+    <template v-if="showAlert">
+      <AlertComp :text="'Lütfen geçerli bir şehir giriniz!'" @acceptAlert="acceptAlertHandler"></AlertComp>
+    </template>
+  </Teleport>
   <main>
     <div class="input">
-      <input class="text-input" @input="autoComplete" v-model="city" type="text">
+      <input class="input__text" @input="autoComplete" v-model="city" type="text">
     </div>
-    <ButtonComp @click="getData"></ButtonComp>
+    <ButtonComp :text="'Ara'" @click="getData"></ButtonComp>
   </main>
   <template v-if="weatherData">
     <Forecast class="search-forecast" :data="weatherData"></Forecast>
   </template>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 main {
   @apply flex flex-col h-[15vh] justify-center items-center;
-}
 
-.input {
-  @apply flex justify-center items-center h-[50px];
-}
+  .input {
+    @apply flex justify-center items-center h-[50px];
 
-.text-input {
-  @apply border rounded-md;
+    &__text {
+      @apply border rounded-md;
+    }
+  }
 }
 
 .search-forecast {
