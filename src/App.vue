@@ -19,7 +19,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style scoped>
 .navbar {
-  @apply h-[5vh] min-h-[100px] flex flex-col justify-center items-center;
+  @apply h-[5vh] min-h-[30px] flex flex-col justify-center items-center;
 }
 
 nav {

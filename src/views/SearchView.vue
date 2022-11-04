@@ -46,7 +46,7 @@ const acceptAlertHandler = () => {
 
 <style lang="scss" scoped>
 main {
-  @apply flex flex-col h-[15vh] justify-center items-center;
+  @apply flex flex-col h-[15vh] min-h-[100px] justify-center items-center;
 
   .input {
     @apply flex justify-center items-center h-[50px];

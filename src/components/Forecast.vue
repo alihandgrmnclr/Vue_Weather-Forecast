@@ -53,8 +53,7 @@ const day = weekDays[new Date().getDay()];
 
 <style lang="scss" scoped>
 .forecast {
-
-  @apply flex flex-col h-full justify-center items-center gap-2 text-white font-normal;
+  @apply flex flex-col min-h-[500px] h-full justify-center items-center gap-2 text-white font-normal;
 
   &__time {
     @apply flex flex-col justify-center items-center text-[1.5rem] font-medium;
