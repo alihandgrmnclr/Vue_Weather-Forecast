@@ -3,8 +3,10 @@ import { onBeforeMount, ref } from "vue";
 import { locationHttp, apiKey } from "../service/HttpService"
 import Forecast from "../components/Forecast.vue"
 
+
 const lat = ref("");
 const lon = ref("");
+const lang = ref("tr"); // en
 const weatherData = ref(null);
 
 onBeforeMount(() => {
@@ -29,7 +31,7 @@ const getLocation = () => {
 
 const getData = async (latitude, longtitude) => {
 
-  const result = await locationHttp.get(`weather?lat=${latitude}&lon=${longtitude}&appid=${apiKey}&units=metric`)
+  const result = await locationHttp.get(`weather?lat=${latitude}&lon=${longtitude}&appid=${apiKey}&units=metric&lang=${lang.value}`)
     .then(res => weatherData.value = res.data);
 
   console.log(weatherData.value);

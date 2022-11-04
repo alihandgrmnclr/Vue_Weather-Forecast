@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { mainHttp, apiKey } from "../service/HttpService"
 import ButtonComp from '../components/ButtonComp.vue';
 import Forecast from "../components/Forecast.vue";
+import Swal from "sweetalert2"
 
 const city = ref("");
 const weatherData = ref(null);
@@ -10,12 +11,17 @@ const weather = ref(false);
 
 const getData = async () => {
 
-  if (city.value.length < 2) return;
+  if (city.value.length <= 2) return alert("Please enter a valid city name");
 
-  const result = await mainHttp.get(`weather?q=${city.value}&appid=${apiKey}&units=metric`)
-    .then(res => weatherData.value = res.data);
+  const result = await mainHttp.get(`weather?q=${city.value}&appid=${apiKey}&units=metric&lang=tr`)
+    .then(res => weatherData.value = res.data)
+    .catch(err => Swal.fire({
+      title: 'Error!',
+      text: 'Please enter a valid city name',
+      icon: 'error',
+      confirmButtonText: 'Accept'
+    }))
 
-  console.log(weatherData.value);
   weather.value = true;
   return result;
 }
@@ -29,12 +35,13 @@ const getFav = () => {
 }
 
 
+
 </script>
 
 <template>
   <main>
     <div class="input">
-      <input class="text-input" v-model="city" type="text">
+      <input class="text-input" @input="autoComplete" v-model="city" type="text">
     </div>
     <ButtonComp @click="getData"></ButtonComp>
   </main>
@@ -56,8 +63,7 @@ main {
   @apply border rounded-md;
 }
 
-.search-forecast{
+.search-forecast {
   @apply h-[80vh];
 }
-
 </style>

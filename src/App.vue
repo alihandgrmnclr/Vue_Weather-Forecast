@@ -1,15 +1,15 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+
 </script>
 
 <template>
   <header>
-
     <div class="navbar">
       <nav>
-        <RouterLink class="link" to="/">Home</RouterLink>
+        <RouterLink class="link" to="/">Ana Sayfa</RouterLink>
         |
-        <RouterLink class="link" to="/search">Search</RouterLink>
+        <RouterLink class="link" to="/search">Arama</RouterLink>
       </nav>
     </div>
   </header>
