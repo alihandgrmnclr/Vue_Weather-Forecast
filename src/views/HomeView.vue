@@ -3,6 +3,7 @@ import { onBeforeMount, ref } from "vue";
 import { locationHttp, apiKey } from "../service/HttpService"
 import Forecast from "../components/Forecast.vue"
 import AlertComp from '../components/AlertComp.vue';
+import Loading from "../components/Loading.vue";
 
 const lat = ref("");
 const lon = ref("");
@@ -29,7 +30,6 @@ const getLocation = () => {
   navigator.geolocation.getCurrentPosition(success, error);
 };
 
-
 const getData = async (latitude, longtitude) => {
 
   const result = await locationHttp.get(`weather?lat=${latitude}&lon=${longtitude}&appid=${apiKey}&units=metric&lang=${lang.value}`)
@@ -47,14 +47,18 @@ const acceptAlertHandler = () => {
 <template>
   <Teleport to="#app">
     <template v-if="showAlert">
-      <AlertComp
-        :text="'Konumunuza erişim sağlanamadı! Konum ayarınızı kontrol edininiz.'"
+      <AlertComp :text="'Konumunuza erişim sağlanamadı! Konum ayarınızı kontrol edininiz.'"
         @acceptAlert="acceptAlertHandler"></AlertComp>
     </template>
   </Teleport>
-  <div class="weather-forecast">
-    <Forecast :data="weatherData"></Forecast>
-  </div>
+  <template v-if="weatherData">
+    <div class="weather-forecast">
+      <Forecast :data="weatherData"></Forecast>
+    </div>
+  </template>
+  <template v-if="!weatherData && lat">
+    <Loading></Loading>
+  </template>
 </template>
 
 <style scoped>
