@@ -28,7 +28,7 @@ const day = weekDays[new Date().getDay()];
               class="forecast__maxes-min">{{ Math.round(props.data.main.temp_min) }}°</span></p>
         </div>
         <div class="forecast__description">
-          <img class="forecast__description__icon" :src="'icons/' + props.data.weather[0].icon + '.png'" alt="">
+          <img class="forecast__description__icon" :src="'/icons/' + props.data.weather[0].icon + '.png'" alt="">
           <p>{{ props.data.weather[0].description }}</p>
         </div>
 

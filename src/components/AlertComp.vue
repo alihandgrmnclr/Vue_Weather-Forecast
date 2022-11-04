@@ -14,7 +14,7 @@ const closeAlert = () => {
   <div class="alert">
     <div class="alertmodal">
       <div class="alertmodal__icon">
-        <img src="icons/alert.png" alt="">
+        <img src="/icons/alert.png" alt="">
       </div>
       <div class="alertmodal__title">
         <p>Hata!</p>
@@ -39,7 +39,7 @@ const closeAlert = () => {
   @apply absolute flex flex-col items-center justify-center top-[40vh] right-0 left-0 ml-auto mr-auto w-[300px] h-[250px] bg-white rounded-md;
 
   &__title {
-    @apply text-3xl;
+    @apply text-3xl mt-auto;
   }
 
   &__text {
