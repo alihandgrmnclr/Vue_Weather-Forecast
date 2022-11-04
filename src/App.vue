@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-
 </script>
 
 <template>
@@ -17,9 +16,15 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .navbar {
   @apply h-[5vh] min-h-[30px] flex flex-col justify-center items-center;
+
+}
+
+.router-link-active{
+  @apply font-black;
+  
 }
 
 nav {
