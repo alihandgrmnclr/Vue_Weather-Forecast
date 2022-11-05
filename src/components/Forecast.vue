@@ -2,7 +2,8 @@
 
 const props = defineProps(["data"]);
 
-const date = new Date().getHours() +"."+ new Date().getMinutes();
+let date = new Date();
+date = date.getHours() + ":" + date.getMinutes();
 const weekDays = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
 const day = weekDays[new Date().getDay()];
 
@@ -104,7 +105,7 @@ const day = weekDays[new Date().getDay()];
   .forecast {
 
     @apply flex flex-col h-full justify-center items-center gap-2 text-white font-normal;
-
+    
     &__time {
       @apply flex flex-col justify-center items-center text-[1.5rem] font-medium;
     }

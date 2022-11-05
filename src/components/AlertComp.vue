@@ -36,7 +36,7 @@ const closeAlert = () => {
 }
 
 .alertmodal {
-  @apply absolute flex flex-col items-center justify-center top-[40vh] right-0 left-0 ml-auto mr-auto w-[300px] h-[250px] bg-white rounded-md;
+  @apply absolute flex flex-col items-center justify-center top-[40vh] right-0 left-0 ml-auto mr-auto w-[320px] h-[250px] bg-white rounded-md;
 
   &__title {
     @apply text-3xl mt-auto;

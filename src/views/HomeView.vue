@@ -34,7 +34,7 @@ const getData = async (latitude, longtitude) => {
 
   const result = await locationHttp.get(`weather?lat=${latitude}&lon=${longtitude}&appid=${apiKey}&units=metric&lang=${lang.value}`)
     .then(res => weatherData.value = res.data);
-
+  
   return result;
 };
 

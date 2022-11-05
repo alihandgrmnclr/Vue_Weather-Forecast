@@ -52,7 +52,7 @@ main {
     @apply flex justify-center items-center h-[50px];
 
     &__text {
-      @apply border rounded-md;
+      @apply border text-center rounded-md;
     }
   }
 }
